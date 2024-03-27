@@ -1,0 +1,25 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/user-api
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+server:
+  port: 8081
+
+jwt:
+  auth:
+    converter:
+      resource-id: user-rest-api
+      principle-attribute: preferred_username
+
+
+keycloak:
+  realm: user-api
+  domain: localhost:8080
+  adminClientId: admin-cli
+  adminClientSecret: P3yXALWyTaYLjYJqWfb18ND3Lrqy0HOn
+  client: authenticationClientId
+  urls:
+    auth: http://${keycloak.domain}
